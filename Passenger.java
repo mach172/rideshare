@@ -16,23 +16,27 @@ public class Passenger {
         idGen++;
     }
 
-    public boolean getArrived(){
+    public boolean getArrivedPassenger(){
         return arrived;
     }
 
-    public int getDestination(){
+    public int getDestinationPassenger(){
         return destination;
     }
 
-    public int getLocation(){
+    public int getLocationPassenger(){
         return location;
     }
 
-    public int getId(){
+    public int getIdPassenger(){
         return id;
     }
 
-    public void move(int direction){
+    public void movePassenger(int direction){
         location += direction;
+    }
+
+    public void isArrived(){
+        arrived = true;
     }
 }
