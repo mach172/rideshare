@@ -12,7 +12,15 @@ public class Station {
     }
 
     public void checkPassengers(ArrayList<Car> carList){
-        
+        for(Passenger a : passengerList){
+            for(Car b : carList){
+                if(b.getPassengerCount() < 3){
+                    if((a.getDestinationPassenger() < location) && (b.getDirection() == 1)){
+
+                    }
+                }
+            }
+        }
     }
 
     public void addPassenger(Passenger a){
@@ -21,5 +29,9 @@ public class Station {
 
     public int getLocation(){
         return location;
+    }
+
+    public void addCompletedPassenger(Passenger a){
+        completedPassengers.add(a);
     }
 }
