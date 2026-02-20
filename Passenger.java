@@ -9,15 +9,11 @@ public class Passenger {
         destination = (int)(Math.random() * 32 + 1);
         location = (int)(Math.random() * 32 + 1);
         id = idGen;
-        arrived = false;
         while(destination == location){
             location = (int)(Math.random() * 32 + 1);
         }
         idGen++;
-    }
-
-    public boolean getArrivedPassenger(){
-        return arrived;
+        arrived = false;
     }
 
     public int getDestinationPassenger(){
@@ -34,9 +30,19 @@ public class Passenger {
 
     public void movePassenger(int direction){
         location += direction;
+        if(location == direction){
+            arrived = true;
+        }
     }
 
-    public void isArrived(){
-        arrived = true;
+    public boolean getArrivedPassenger(){
+        return arrived;
+    }
+
+    public boolean checkArrived(){
+        if(location == destination){
+            arrived = true;
+        }
+        return arrived;
     }
 }
