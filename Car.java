@@ -7,7 +7,7 @@ public class Car {
     private int destination;
     private boolean arrived;
     private int id;
-    private static int idGen = 0;
+    private static int idGen = 1;
 
     public Car(){
         passengerList = new ArrayList<Passenger>();
@@ -28,19 +28,7 @@ public class Car {
     }
 
     public void advanceCar(){
-        if(!arrived){
-            for(Passenger a : passengerList){
-                a.movePassenger(direction);
-                if(a.getDestinationPassenger() == a.getLocationPassenger()){
-                    a.isArrived();
-                    passengerList.remove(a);
-                }
-            }
-            location++;
-            if(location == destination){
-                arrived = true;
-            }
-        }
+        location += direction;
     }
 
     public int getLocationCar(){
@@ -53,5 +41,17 @@ public class Car {
 
     public ArrayList<Passenger> getPassengerList(){
         return passengerList;
+    }
+
+    public boolean getArrived(){
+        return arrived;
+    }
+
+    public void removePassenger(Passenger a){
+        passengerList.remove(a);
+    }
+
+    public int getIdCar(){
+        return id;
     }
 }
