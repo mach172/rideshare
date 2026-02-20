@@ -25,6 +25,22 @@ public class Road {
     }
 
     public void advanceAllCars(){
-        
+        for(Car a : carList){
+            if(!a.getArrived()){
+                a.advanceCar();
+                //checks if passenger is at stop
+                for(Passenger b : a.getPassengerList()){
+                    if(b.getArrivedPassenger()){
+                        for(Station c : stationList){
+                            if(b.getLocationPassenger() == c.getLocation()){
+                                c.addPassenger(b);
+                            }
+                        }
+                        a.removePassenger(b);
+                    }
+                }
+                //TODO check passengers
+            }
+        }
     }
 }
