@@ -15,8 +15,9 @@ public class Station {
         for(Passenger a : passengerList){
             for(Car b : carList){
                 if(b.getPassengerCount() < 3){
-                    if((a.getDestinationPassenger() < location) && (b.getDirection() == 1)){
-
+                    if((a.getDestinationPassenger() > location) && (b.getDirection() == 1)){
+                        b.addPassengerCar(a);
+                        passengerList.remove(a);
                     }
                 }
             }
