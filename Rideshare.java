@@ -1,5 +1,13 @@
 import java.util.*;
 
+/*
+TODO: 
+advance cars
+    check passengers
+    check car
+toStrings
+*/
+
 public class Rideshare {
     public static void main(String[] args) {
         Road theRoad = new Road();
@@ -9,8 +17,6 @@ public class Rideshare {
             passengerActiveList.add(new Passenger());
             theRoad.addPassengerStation(i, passengerActiveList.get(i));
         }
-
-        ArrayList<Passenger> passengerCompletedList = new ArrayList<Passenger>();
 
         ArrayList<Car> carActiveList = new ArrayList<Car>();
         //CHANGE I BOUNDS TO CHANGE NUMBER OF CARS
