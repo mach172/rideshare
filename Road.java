@@ -39,8 +39,11 @@ public class Road {
                         a.removePassenger(b);
                     }
                 }
-                //TODO check passengers
             }
+        }
+        //checks passengers at station
+        for(Station a : stationList){
+            a.checkPassengers(carList);
         }
     }
 }
