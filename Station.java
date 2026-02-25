@@ -12,12 +12,12 @@ public class Station {
     }
 
     public void checkPassengers(ArrayList<Car> carList){
-        for(Passenger a : passengerList){
+        for(int i = passengerList.size()-1; i > 0; i--){
             for(Car b : carList){
                 if(b.getPassengerCount() < 3){
-                    if((a.getDestinationPassenger() > location) && (b.getDirection() == 1)){
-                        b.addPassengerCar(a);
-                        passengerList.remove(a);
+                    if((passengerList.get(i).getDestinationPassenger() > location) && (b.getDirection() == 1)){
+                        b.addPassengerCar(passengerList.get(i));
+                        passengerList.remove(passengerList.get(i));
                     }
                 }
             }
@@ -34,5 +34,9 @@ public class Station {
 
     public void addCompletedPassenger(Passenger a){
         completedPassengers.add(a);
+    }
+
+    public ArrayList<Passenger> getCompletedPassengerList(){
+        return completedPassengers;
     }
 }
