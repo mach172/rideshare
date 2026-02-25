@@ -31,4 +31,12 @@ public class Passenger {
     public boolean getArrivedPassenger(){
         return arrived;
     }
+
+    public void passengerIsArrived(){
+        arrived = true;
+    }
+
+    public String toString(){
+        return "ID: " + id + ", Destination: " + destination + ", Start: " + start + ", Arrived: " + arrived;
+    }
 }
