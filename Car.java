@@ -29,6 +29,9 @@ public class Car {
 
     public void advanceCar(){
         location += direction;
+        if(location == direction){
+            arrived = true;
+        }
     }
 
     public int getLocationCar(){
@@ -53,5 +56,21 @@ public class Car {
 
     public int getIdCar(){
         return id;
+    }
+
+    public int getDirection(){
+        return direction;
+    }
+
+    public void addPassengerCar(Passenger a){
+        passengerList.add(a);
+    }
+
+    public String toString(){
+        String s = "ID: " + id + ", Location: " + location + ", Destination: " + destination + ", Arrived: " + arrived + "\nPassenger List:";
+        for(Passenger a : passengerList){
+            s += "\n" + a.toString();
+        }
+        return s;
     }
 }
