@@ -4,14 +4,14 @@ public class Road {
     private ArrayList<Station> stationList;
     private ArrayList<Car> carList;
 
-    public Road(){
+    public Road(int carNumber){
         stationList = new ArrayList<Station>();
         for(int i = 1; i <= 32; i++){
             stationList.add(new Station(i));
         }
 
         carList = new ArrayList<Car>();
-        for(int i = 1; i <= 30; i++){
+        for(int i = 1; i <= carNumber; i++){
             carList.add(new Car());
         }
     }
@@ -27,10 +27,10 @@ public class Road {
     public void advanceAllCars(){
         for(Car a : carList){
             if(!a.getArrived()){
-                a.advanceCar();
                 //checks if passenger is at stop
                 for(Passenger b : a.getPassengerList()){
-                    if(b.getArrivedPassenger()){
+                    if(a.getLocationCar() == b.getDestinationPassenger()){
+                        b.passengerIsArrived();
                         for(Station c : stationList){
                             if(b.getLocationPassenger() == c.getLocation()){
                                 c.addPassenger(b);
@@ -39,11 +39,31 @@ public class Road {
                         a.removePassenger(b);
                     }
                 }
+                a.advanceCar();
+                //removes all passengers if car is at stop
+                if(a.getArrived()){
+                    for(Station c : stationList){
+                        if(c.getLocation() == a.getLocationCar()){
+                            for(Passenger d : a.getPassengerList()){
+                                c.addPassenger(d);
+                                a.removePassenger(d);
+                            }
+                        }
+                    }
+                }
             }
         }
         //checks passengers at station
         for(Station a : stationList){
             a.checkPassengers(carList);
         }
+    }
+
+    public ArrayList<Station> getStationList(){
+        return stationList;
+    }
+
+    public ArrayList<Car> getCarList(){
+        return carList;
     }
 }
