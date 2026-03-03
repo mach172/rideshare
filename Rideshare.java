@@ -14,7 +14,7 @@ public class Rideshare {
         ArrayList<Passenger> passengerMasterList = new ArrayList<Passenger>();
         for(int i = 0; i < 50; i++){
             passengerMasterList.add(new Passenger());
-            theRoad.addPassengerStation(i, passengerMasterList.get(i));
+            theRoad.addPassengerStation(passengerMasterList.get(i).getStartPassenger(), passengerMasterList.get(i));
         }
 
         while(true){
@@ -22,6 +22,7 @@ public class Rideshare {
             for(Car a : theRoad.getCarList()){
                 if(!a.getArrived()){
                     allArrived = false;
+                    System.out.println("Not all arrived");
                     break;
                 }
             }
@@ -29,6 +30,7 @@ public class Rideshare {
                 break;
             }
             theRoad.advanceAllCars();
+
         }
 
         int completedCountMasterList = 0;
