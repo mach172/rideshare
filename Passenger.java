@@ -20,7 +20,7 @@ public class Passenger {
         return destination;
     }
 
-    public int getLocationPassenger(){
+    public int getStartPassenger(){
         return start;
     }
 
