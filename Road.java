@@ -9,11 +9,13 @@ public class Road {
         for(int i = 1; i <= 32; i++){
             stationList.add(new Station(i));
         }
+        System.out.println("Created stations");
 
         carList = new ArrayList<Car>();
         for(int i = 1; i <= carNumber; i++){
             carList.add(new Car());
         }
+        System.out.println("Created cars");
     }
     
     public void addPassengerStation(int station, Passenger passIn){
@@ -25,14 +27,18 @@ public class Road {
     }
 
     public void advanceAllCars(){
+        for(Station d : stationList){
+            d.checkPassengers(carList);
+        }
+
         for(Car a : carList){
-            if(!a.getArrived()){
+            if(!(a.getArrived())){
                 //checks if passenger is at stop
                 for(Passenger b : a.getPassengerList()){
                     if(a.getLocationCar() == b.getDestinationPassenger()){
                         b.passengerIsArrived();
                         for(Station c : stationList){
-                            if(b.getLocationPassenger() == c.getLocation()){
+                            if(b.getStartPassenger() == c.getLocation()){
                                 c.addPassenger(b);
                             }
                         }
@@ -52,10 +58,6 @@ public class Road {
                     }
                 }
             }
-        }
-        //checks passengers at station
-        for(Station a : stationList){
-            a.checkPassengers(carList);
         }
     }
 
