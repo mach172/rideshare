@@ -12,12 +12,16 @@ public class Station {
     }
 
     public void checkPassengers(ArrayList<Car> carList){
-        for(int i = passengerList.size()-1; i > 0; i--){
-            for(Car b : carList){
-                if(b.getPassengerCount() < 3){
-                    if((passengerList.get(i).getDestinationPassenger() > location) && (b.getDirection() == 1)){
-                        b.addPassengerCar(passengerList.get(i));
-                        passengerList.remove(passengerList.get(i));
+        //TODO add if statement do check if list has size
+        if(passengerList.size()>0){
+            for(int i = passengerList.size()-1; i >= 0; i--){
+                for(Car b : carList){
+                    if(b.getPassengerCount() < 3){
+                        if((passengerList.get(i).getDestinationPassenger() > location) && (b.getDirection() == 1)){
+                            //TODO: IndexOutOfBoundsException in the if statement(how????)
+                            b.addPassengerCar(passengerList.get(i));
+                            passengerList.remove(passengerList.get(i));
+                        }
                     }
                 }
             }
