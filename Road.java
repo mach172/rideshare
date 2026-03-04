@@ -9,13 +9,11 @@ public class Road {
         for(int i = 1; i <= 32; i++){
             stationList.add(new Station(i));
         }
-        System.out.println("Created stations");
 
         carList = new ArrayList<Car>();
         for(int i = 1; i <= carNumber; i++){
             carList.add(new Car());
         }
-        System.out.println("Created cars");
     }
     
     public void addPassengerStation(int station, Passenger passIn){
@@ -27,37 +25,31 @@ public class Road {
     }
 
     public void advanceAllCars(){
-        for(Station d : stationList){
-            d.checkPassengers(carList);
+        for(Car a : carList){
+            a.advanceCar();
         }
 
         for(Car a : carList){
-            if(!(a.getArrived())){
-                //checks if passenger is at stop
-                for(Passenger b : a.getPassengerList()){
-                    if(a.getLocationCar() == b.getDestinationPassenger()){
-                        b.passengerIsArrived();
-                        for(Station c : stationList){
-                            if(b.getStartPassenger() == c.getLocation()){
-                                c.addPassenger(b);
-                            }
-                        }
-                        a.removePassenger(b);
-                    }
-                }
-                a.advanceCar();
-                //removes all passengers if car is at stop
-                if(a.getArrived()){
+            for(int i = 0; i < a.getPassengerCount();){
+                Passenger b = a.getPassengerList().get(i);
+                if(b.getDestinationPassenger() == a.getLocationCar()){
+                    b.passengerIsArrived();
                     for(Station c : stationList){
                         if(c.getLocation() == a.getLocationCar()){
-                            for(Passenger d : a.getPassengerList()){
-                                c.addPassenger(d);
-                                a.removePassenger(d);
-                            }
+                            c.addCompletedPassenger(b);
+                            break;
                         }
                     }
+                    a.getPassengerList().remove(i);
+                }
+                else{
+                    i++;
                 }
             }
+        }
+
+        for(Station a : stationList){
+            a.checkPassengers(carList);
         }
     }
 
@@ -67,5 +59,17 @@ public class Road {
 
     public ArrayList<Car> getCarList(){
         return carList;
+    }
+
+    public String toString(){
+        String s = "Station list:";
+        for(Station a : stationList){
+            s += "\n" + a.toString();
+        }
+        s+= "\nCar list:";
+        for(Car a : carList){
+            s += "\n" + a.toString();
+        }
+        return s;
     }
 }
