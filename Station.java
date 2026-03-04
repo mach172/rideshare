@@ -12,17 +12,26 @@ public class Station {
     }
 
     public void checkPassengers(ArrayList<Car> carList){
-        if(passengerList.size()>0){
-            boolean checkCompleted = false;
-            while(!checkCompleted){
-                for(int i = passengerList.size()-1; i >= 0; i--){
-                    for(Car b : carList){
-                        if(b.getPassengerCount() < 3){
-                            if((passengerList.get(i).getDestinationPassenger() > location) && (b.getDirection() == 1)){
-                                //TODO when one a passenger is added/removed from the passengerList, it changes the size but it has no affect on the for(i) loop leading to an IndexOutOfBoundsException
-                                b.addPassengerCar(passengerList.get(i));
-                                passengerList.remove(passengerList.get(i));
-                            }
+        for(Car a : carList){
+            if(!a.getArrived()){
+                if(a.getLocationCar() == location){
+                    for(int i = 0; i < passengerList.size() && (a.getPassengerCount() != 3); ){
+                        Passenger b = passengerList.get(i);
+
+                        boolean passengerSameDirection =
+                                (a.getDirection() == 1 && b.getDestinationPassenger() > location) ||
+                                (a.getDirection() == -1 && b.getDestinationPassenger() < location);
+
+                        boolean carCanReachDestination =
+                                (a.getDirection() == 1 && a.getDestination() >= b.getDestinationPassenger()) ||
+                                (a.getDirection() == -1 && a.getDestination() <= b.getDestinationPassenger());
+
+                        if(passengerSameDirection && carCanReachDestination){
+                            a.addPassengerCar(b);
+                            passengerList.remove(i);
+                        }
+                        else{
+                            i++;
                         }
                     }
                 }
@@ -44,5 +53,17 @@ public class Station {
 
     public ArrayList<Passenger> getCompletedPassengerList(){
         return completedPassengers;
+    }
+
+    public String toString(){
+        String s = "Location: " + location + "\nPassenger List:";
+        for(Passenger a : passengerList){
+            s += "\n" + a.toString();
+        }
+        s+= "\nCompleted passengers:";
+        for(Passenger a : completedPassengers){
+            s += "\n" + a.toString();
+        }
+        return s;
     }
 }
