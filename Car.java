@@ -15,7 +15,7 @@ public class Car {
         destination = (int)(Math.random() * 32 + 1);
         arrived = false;
         while(destination == location){
-            location = (int)(Math.random() * 32 + 1);
+            destination = (int)(Math.random() * 32 + 1);
         }
         id = idGen;
         idGen++;
@@ -28,14 +28,21 @@ public class Car {
     }
 
     public void advanceCar(){
-        location += direction;
-        if(location == direction){
-            arrived = true;
+        if(!arrived){
+            location += direction;
+
+            if(location == destination){
+                arrived = true;
+            }
         }
     }
 
     public int getLocationCar(){
         return location;
+    }
+
+    public int getDestination(){
+        return destination;
     }
 
     public int getPassengerCount(){
