@@ -22,6 +22,7 @@ public class Rideshare {
                 //runs simulation
                 while(true){
                     System.out.println(theRoad.toString() + "\n");
+                    
                     theRoad.advanceAllCars();
 
                     boolean allArrived = true;
@@ -67,5 +68,7 @@ public class Rideshare {
                 break;
             }
         }
+
+        input.close();
     }
 }
