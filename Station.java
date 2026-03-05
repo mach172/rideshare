@@ -15,18 +15,11 @@ public class Station {
         for(Car a : carList){
             if(!a.getArrived()){
                 if(a.getLocationCar() == location){
-                    for(int i = 0; i < passengerList.size() && (a.getPassengerCount() != 3); ){
+                    for(int i = 0; i < passengerList.size() && (a.getPassengerCount() < 3); ){
                         Passenger b = passengerList.get(i);
 
-                        boolean passengerSameDirection =
-                                (a.getDirection() == 1 && b.getDestinationPassenger() > location) ||
-                                (a.getDirection() == -1 && b.getDestinationPassenger() < location);
-
-                        boolean carCanReachDestination =
-                                (a.getDirection() == 1 && a.getDestination() >= b.getDestinationPassenger()) ||
-                                (a.getDirection() == -1 && a.getDestination() <= b.getDestinationPassenger());
-
-                        if(passengerSameDirection && carCanReachDestination){
+                        if((a.getDirection() == 1 && b.getDestinationPassenger() > location) ||
+                        (a.getDirection() == -1 && b.getDestinationPassenger() < location)){
                             a.addPassengerCar(b);
                             passengerList.remove(i);
                         }
