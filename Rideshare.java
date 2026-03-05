@@ -1,7 +1,6 @@
 import java.util.*;
 
 public class Rideshare {
-    @SuppressWarnings("ConvertToTryWithResources")
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -15,7 +14,6 @@ public class Rideshare {
                 Road theRoad = new Road(e);
 
                 //makes all passengers
-                @SuppressWarnings("Convert2Diamond")
                 ArrayList<Passenger> passengerMasterList = new ArrayList<Passenger>();
                 for(int i = 0; i < 50; i++){
                     passengerMasterList.add(new Passenger());
