@@ -1,18 +1,21 @@
 import java.util.*;
 
 public class Rideshare {
+    @SuppressWarnings("ConvertToTryWithResources")
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        
-        int completedCountMasterList20 = 0;
-        int completedCountMasterList40 = 0;
 
         System.out.println("Welcome to the rideshare simulation");
+
         while(true){
+            int completedCountMasterList20 = 0;
+            int completedCountMasterList40 = 0;
+
             for(int e = 20; e <= 40; e+= 20){
                 Road theRoad = new Road(e);
 
                 //makes all passengers
+                @SuppressWarnings("Convert2Diamond")
                 ArrayList<Passenger> passengerMasterList = new ArrayList<Passenger>();
                 for(int i = 0; i < 50; i++){
                     passengerMasterList.add(new Passenger());
