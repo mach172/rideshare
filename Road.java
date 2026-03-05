@@ -30,6 +30,25 @@ public class Road {
         }
 
         for(Car a : carList){
+            if(a.getArrived()){
+                for(Station c : stationList){
+                    if(c.getLocation() == a.getLocationCar()){
+                        while(a.getPassengerCount() > 0){
+                            Passenger d = a.getPassengerList().get(0);
+                            if(d.getDestinationPassenger() == a.getLocationCar()){
+                                d.passengerIsArrived();
+                                c.addCompletedPassenger(d);
+                            }
+                            else{
+                                c.addPassenger(d);
+                            }
+
+                            a.removePassenger(d);
+                        }
+                    }
+                }
+            }
+
             for(int i = 0; i < a.getPassengerCount();){
                 Passenger b = a.getPassengerList().get(i);
                 if(b.getDestinationPassenger() == a.getLocationCar()){
